@@ -1,0 +1,5 @@
+image_path,x1,y1,x2,y2
+./dataset/grayscale_input/photo_23_2024-03-19_17-10-36-copy-0.jpg,104,186,124,134
+./dataset/grayscale_input/photo_2_2024-03-19_17-10-36.jpg,66,106,84,137
+./dataset/grayscale_input/photo_8_2024-03-19_17-10-36.jpg,67,129,71,102
+./dataset/grayscale_input/photo_1_2024-03-19_17-10-36.jpg,67,141,67,110

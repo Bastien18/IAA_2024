@@ -1,0 +1,16 @@
+image_path,x1,y1,x2,y2
+./dataset/grayscale_input/photo_22_2024-03-19_17-10-36.jpg,127,152,131,110
+./dataset/grayscale_input/photo_5_2024-03-19_17-10-36.jpg,73,99,100,137
+./dataset/grayscale_input/photo_19_2024-03-19_17-10-36.jpg,44,138,120,89
+./dataset/grayscale_input/photo_20_2024-03-19_17-10-36.jpg,100,127,120,100
+./dataset/grayscale_input/photo_14_2024-03-19_17-10-36.jpg,84,82,113,148
+./dataset/grayscale_input/photo_23_2024-03-19_17-10-36.jpg,106,177,121,121
+./dataset/grayscale_input/photo_17_2024-03-19_17-10-36.jpg,98,168,120,117
+./dataset/grayscale_input/photo_15_2024-03-19_17-10-36.jpg,75,95,80,122
+./dataset/grayscale_input/photo_10_2024-03-19_17-10-36.jpg,87,77,136,153
+./dataset/grayscale_input/photo_9_2024-03-19_17-10-36.jpg,92,72,136,140
+./dataset/grayscale_input/photo_6_2024-03-19_17-10-36.jpg,56,121,67,147
+./dataset/grayscale_input/photo_13_2024-03-19_17-10-36.jpg,67,106,124,177
+./dataset/grayscale_input/photo_18_2024-03-19_17-10-36.jpg,84,82,160,143
+./dataset/grayscale_input/photo_12_2024-03-19_17-10-36.jpg,79,88,138,114
+./dataset/grayscale_input/photo_7_2024-03-19_17-10-36.jpg,84,107,124,144
