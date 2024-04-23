@@ -9,6 +9,15 @@
 #define CAM_WIDTH 324
 #define CAM_HEIGHT 244
 
+typedef struct
+{
+  uint16_t width;
+  uint16_t height;
+  uint8_t depth;
+  uint8_t type;
+  uint32_t size;
+} __attribute__((packed)) img_header_t;
+
 
 void sendToSTM32(void);
 void rx_wifi_task(void *parameters);
@@ -95,7 +104,7 @@ void sendToSTM32(void) {
  * - know if a PC is connected to the drone
  */
 void rx_wifi_task(void *parameters) {
-    
+
     /* TODO */
 }
 
@@ -106,6 +115,25 @@ void rx_wifi_task(void *parameters) {
  */
 void send_image_via_wifi(unsigned char *image, uint16_t width, uint16_t height) {
     /* TODO */
+    img_header_t header;
+    CPXPacket_t header_packet;
+    unsigned char buffer[sizeof(ImageHeader)];
+    unsigned char im_buffer[width * height];
+
+    //TODO initialisation du header
+    header.type = 0x1; // TODO check si notre convention ou un truc existant
+    header.width = width;
+    header.height = height;
+    header.depth = 1;
+    header.size = width * height * header.depth;
+
+    // Send the image header
+    memcpy(buffer, &header, sizeof(ImageHeader)); // copy the  in the buffer
+    sendBufferViaCPXBlocking(&header_packet, &buffer, sizeof(ImageHeader));
+
+    // Send the image in multiple packet
+    memcpy(im_buffer, image, width * height); // copy the image in the buffer
+    sendBufferViaCPXBlocking(im_buffer, image, width * height);
 }
 
 
