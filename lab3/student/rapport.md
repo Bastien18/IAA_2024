@@ -25,6 +25,7 @@ The value of fc Frequency is 50MHz:
 - **What part of the data flow is responsible for these ?**
 
 - **What happens when you connect 2 clients to the GAP8 ? Is it an expected behavior ?**
+**If I connect another client to the drone nothing happens or is printed**
 
 ### 4. Image acquisition :
 
@@ -55,7 +56,7 @@ The communication protocol seems to be based on the CPX (Cyclops-P7) protocol, w
 
 - **Explain your cropping algorithm.**
 
-he cropping algorithm implemented in the reshape_img function crops an input image by taking only the inner center pixels, resulting in an output image with specified dimensions.
+The cropping algorithm implemented in the reshape_img function crops an input image by taking only the inner center pixels, resulting in an output image with specified dimensions.
 
 The function calculates the offsets (xOffset and yOffset) needed to center the crop region within the input image. These offsets are calculated by finding the difference between the dimensions of the input image and the desired dimensions of the output image, and then dividing by 2. This ensures that the crop region is centered both horizontally and vertically within the input image.
 
@@ -69,17 +70,6 @@ After iterating through all pixels in the output image, the resulting output ima
 
 - **What is the shape of the original image ?**
 
-### TASK 3
+The Shape of the drone originals images is 324 pixels of width and 244 pixels of height.
 
-— In the CfClient console do you only see your prints ? If not, explain the other prints.
-
-****
-
-— What part of the data flow is responsible for these ?
-
-****
-
-— What happens when you connect 2 clients to the GAP8 ? Is it an expected behavior ?
-
-**If I connect another client to the drone nothing happens or is printed**
 
