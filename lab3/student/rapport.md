@@ -53,6 +53,22 @@ The communication protocol seems to be based on the CPX (Cyclops-P7) protocol, w
 
 ### 6. Image processing : 
 
+- **Explain your cropping algorithm.**
+
+he cropping algorithm implemented in the reshape_img function crops an input image by taking only the inner center pixels, resulting in an output image with specified dimensions.
+
+The function calculates the offsets (xOffset and yOffset) needed to center the crop region within the input image. These offsets are calculated by finding the difference between the dimensions of the input image and the desired dimensions of the output image, and then dividing by 2. This ensures that the crop region is centered both horizontally and vertically within the input image.
+
+Next, The function iterates through each pixel in the output image.
+
+For each pixel in the output image, the corresponding pixel from the input image is determined based on the current coordinates of the output image and the calculated offsets. This mapping ensures that pixels are copied from the center region of the input image to the output image.
+
+The pixel data from the input image corresponding to the calculated coordinates is copied to the output image.
+
+After iterating through all pixels in the output image, the resulting output image contains only the inner center pixels of the input image, cropped to the specified dimensions.
+
+- **What is the shape of the original image ?**
+
 ### TASK 3
 
 — In the CfClient console do you only see your prints ? If not, explain the other prints.
