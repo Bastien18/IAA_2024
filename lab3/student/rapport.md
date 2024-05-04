@@ -27,6 +27,14 @@ The value of fc Frequency is 50MHz:
 **What happens when you connect 2 clients to the GAP8 ? Is it an expected behavior ?**
 
 ### 4. Image acquisition :
+
+For this task we followed the tutorial in the README file.
+We implement this solution, the one proposed for this lab :
+
+![](./img/iaa_lab3_acuisition.png) 
+
+The camera_task function orchestrates the acquisition and transmission of images. Initially, it sets up a delay to ensure system stability before starting its operations. It allocates memory for the image buffer and initializes the camera for image capture. Utilizing a semaphore for synchronization, it initiates image capturing asynchronously and awaits its completion. Upon capture completion, the image undergoes resizing to fit specific requirements. Subsequently, if a client is connected, the function transmits the resized image via Wi-Fi.
+
 ### 5. Transfer information from GAP 8 to PC via Wifi :
 ### 6. Image processing : 
 
