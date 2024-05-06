@@ -24,7 +24,7 @@ The value of fc Frequency is 50MHz:
 
 ![](./picture/Screenshot_2024-04-30_17-55-03.png)
 
-Like we can see above we do not receive only our prints in the cfclient. We receive also other message from the esp32, the micro controller wifi. It is the Wi-Fi network interface between the PC and the drone, so we receive connection status log for example. 
+Like we can see above we do not receive only our prints in the cfclient. We receive also other message from the esp32, the micro controller wifi. It is the Wi-Fi network interface between the PC and the drone, so we receive connection status log for example. In the CFClient I didn't well understand the message CPX-INT-ROUTER Message on function which is not handled (0x5). What I can tell is 0x5 is corresponding to the app function and this message is sent at the same time we send frequency information. 
 
 - **What part of the data flow is responsible for these ?**
 
