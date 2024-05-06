@@ -59,7 +59,7 @@ We use the ```cpxSendPacketBlocking``` function then to send the header to the r
 
 Following the transmission of header information, the actual image data is sent using the sendBufferViaCPXBlocking function => because image size can exceed MTU we split the image data into multiple packet, the reciever is in charge to gather all the data afterward.
 
-The communication protocol seems to be based on the CPX (Cyclops-P7) protocol, which is a proprietary protocol for communication between the drone (or other devices) and a host system (in this case, a PC) over a WiFi connection.
+We reuse the python script opencv-viewer.py from the wifi-img-streamer project. To gather all the image data our python script fetch img size by unpacking header structure and then we append each batch of data to the imgStream data array until we've gather every data from every packet.
 
 ### 6. Image processing : 
 
