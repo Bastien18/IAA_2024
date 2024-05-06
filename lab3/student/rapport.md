@@ -22,11 +22,18 @@ The value of fc Frequency is 50MHz:
 
 - **In the CfClient console do you only see your prints ? If not, explain the other prints.**
 
+![](./picture/Screenshot_2024-04-30_17-55-03.png)
+
+Like we can see above there is not only our prints but also CXP ESP32 logs to specify the connection status.
+
+//TODO je ne sais d'ou vienne les cpx int router ...
+
 - **What part of the data flow is responsible for these ?**
-
+//TODO euh pas sur de comprendre la question ^^'
 - **What happens when you connect 2 clients to the GAP8 ? Is it an expected behavior ?**
-**If I connect another client to the drone nothing happens or is printed**
 
+If I connect another client to the drone nothing happens or is printed.
+//TODO expected or not depend on the implementation ^^' i don't know 
 ### 4. Image acquisition :
 
 For this task we followed the tutorial in the README file.
