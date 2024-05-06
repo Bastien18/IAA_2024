@@ -34,7 +34,7 @@ Here we specify in the rx_wifi_task we wait on the CPX_F_WIFI_CTRL function to p
 
 - **What happens when you connect 2 clients to the GAP8 ? Is it an expected behavior ?**
 
-If I connect another client to the drone nothing happens or is printed. This is the case because the variable set when the connection is made is already set so the program ignores the packet.
+If I connect another client to the drone nothing happens or is printed. But on the host side we are unable to connect more than one host to the drone. We need to disconnect one host in order to connect the other one.
 
 ### 4. Image acquisition :
 
