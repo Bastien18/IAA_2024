@@ -34,7 +34,7 @@ Here we specify in the rx_wifi_task we wait on the CPX_F_WIFI_CTRL function to p
 
 - **What happens when you connect 2 clients to the GAP8 ? Is it an expected behavior ?**
 
-If I connect another client to the drone nothing happens or is printed. But on the host side we are unable to connect more than one host to the drone. We need to disconnect one host in order to connect the other one.
+If I connect another client to the drone nothing happens or is printed. But on the host side we are unable to connect more than one host to the drone. We need to disconnect one host in order to connect the other one. I can't realy explain why we can't connect connect multiple host at the same time. I searched in the ai deck documentation and in the NINA-W102 datasheet but I couldn't find any explanation. 
 
 ### 4. Image acquisition :
 
