@@ -24,13 +24,13 @@ The value of fc Frequency is 50MHz:
 
 ![](./picture/Screenshot_2024-04-30_17-55-03.png)
 
-Like we can see above we do not receive only our prints in the cfclient. We receive also other message from the esp32, the micro controller wifi. It is the Wi-Fi network interface between the PC and the drone, so we receive connection status log for example. In the CFClient I didn't well understand the message CPX-INT-ROUTER Message on function which is not handled (0x5). What I can tell is 0x5 is corresponding to the app function and this message is sent at the same time we send frequency information. 
+Like we can see above we do not receive only our prints in the cfclient. We receive also other message from the esp32, the micro controller wifi. It is the Wi-Fi network interface between the PC and the drone, so we receive connection status log for example. In the CFClient we recieve the message CPX-INT-ROUTER Message on function which is not handled (0x5) because we couldn't flash the stm32 with the main.c receive_app_msg succesfully. The makefile kept saying that the path we specified is a directory we tried to give the absolute and relative path but neither of them worked. Nevertheless we succesfully receive the frequency with the cpxPrintToConsole function.
 
 - **What part of the data flow is responsible for these ?**
 
-The part responsible for these messages is the esp32 that receives Wi-Fi messages from the PC and forwards them to the GAP8 through UART.
+The part responsible for these messages is the esp32 that receives Wi-Fi messages from the PC and forwards them to the GAP8 through UART. CPX has its own communication stack which allow to route packet on the different intermediate on the ai deck and drone itself (GAP8, esp32, stm32 and host wifi=>pc);
 
-The Gap8 uses a core like a microcontroller that gets the images from the camera and gives them to the esp32 module. Then the esp module sends the images to the connected PC. 
+Here we specify in the rx_wifi_task we wait on the CPX_F_WIFI_CTRL function to provides us the packet with wifi setup and signaling information. Knowing the only wifi interface on the drone is the esp32 I think the wifi control function is implemented on the esp. When the esp32 get a new wifi connection info it sends it to the GAP8 via SPI with the function CPX_F_WIFI_CTRL in the CPX header. Then we can retrieve connection status by casting data field into (WiFiCTRLPacket_t) and the status will be stored in the first byte.
 
 - **What happens when you connect 2 clients to the GAP8 ? Is it an expected behavior ?**
 
