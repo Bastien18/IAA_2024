@@ -24,16 +24,18 @@ The value of fc Frequency is 50MHz:
 
 ![](./picture/Screenshot_2024-04-30_17-55-03.png)
 
-Like we can see above there is not only our prints but also CXP ESP32 logs to specify the connection status.
-
-//TODO je ne sais d'ou vienne les cpx int router ...
+Like we can see above we do not receive only our prints in the cfclient. We receive also other message from the esp32, the micro controller wifi. It is the Wi-Fi network interface between the PC and the drone, so we receive connection status log for example. 
 
 - **What part of the data flow is responsible for these ?**
-//TODO euh pas sur de comprendre la question ^^'
+
+The part responsible for these messages is the esp32 that receives Wi-Fi messages from the PC and forwards them to the GAP8 through UART.
+
+The Gap8 uses a core like a microcontroller that gets the images from the camera and gives them to the esp32 module. Then the esp module sends the images to the connected PC. 
+
 - **What happens when you connect 2 clients to the GAP8 ? Is it an expected behavior ?**
 
-If I connect another client to the drone nothing happens or is printed.
-//TODO expected or not depend on the implementation ^^' i don't know 
+If I connect another client to the drone nothing happens or is printed. This is the case because the variable set when the connection is made is already set so the program ignores the packet.
+
 ### 4. Image acquisition :
 
 For this task we followed the tutorial in the README file.
@@ -60,6 +62,16 @@ Following the transmission of header information, the actual image data is sent 
 The communication protocol seems to be based on the CPX (Cyclops-P7) protocol, which is a proprietary protocol for communication between the drone (or other devices) and a host system (in this case, a PC) over a WiFi connection.
 
 ### 6. Image processing : 
+
+- **Provide a plot of one original image and one one the cropped images**
+
+original : 
+
+![](./picture/original_berset.png)
+
+cropped : 
+
+![](./picture/cropped_berset.png)
 
 - **Explain your cropping algorithm.**
 
