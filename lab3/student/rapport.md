@@ -55,9 +55,9 @@ The maximum packet size is determined by the underlying communication protocol a
 
 we  created a function that creates a header packet containing information about the image captured by the drone. This includes metadata such as width, height, depth, type, and size of the image.
 
-We use the ```sendBufferViaCPXBlocking``` function then to send the header to the route configured before with ```cpxInitRoute(CPX_T_GAP8, CPX_T_WIFI_HOST, CPX_F_APP, &txp.route)```. This function sends the packet over the WiFi connection to the designated host (in this case, a PC).
+We use the ```cpxSendPacketBlocking``` function then to send the header to the route configured before with ```cpxInitRoute(CPX_T_GAP8, CPX_T_WIFI_HOST, CPX_F_APP, &txp.route)```. This function sends the packet over the WiFi connection to the designated host (in this case, a PC).
 
-Following the transmission of header information, the actual image data is sent using the sendBufferViaCPXBlocking function. This function  sends the image data buffer over the same WiFi connection to the PC.
+Following the transmission of header information, the actual image data is sent using the sendBufferViaCPXBlocking function => because image size can exceed MTU we split the image data into multiple packet, the reciever is in charge to gather all the data afterward.
 
 The communication protocol seems to be based on the CPX (Cyclops-P7) protocol, which is a proprietary protocol for communication between the drone (or other devices) and a host system (in this case, a PC) over a WiFi connection.
 
