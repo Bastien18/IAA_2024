@@ -49,7 +49,7 @@ The camera_task function orchestrates the acquisition and transmission of images
 
 - **What is the max packet size ?**
 
-The maximum packet size is determined by the underlying communication protocol and the network infrastructure being used. In this case, since the communication is happening over WiFi, the maximum packet size is typically determined by the Maximum Transmission Unit (MTU) of the WiFi network. The MTU defines the maximum size of a packet that can be transmitted over the network without fragmentation.
+The maximum packet size is determined by the underlying communication protocol and the network infrastructure being used. In this case, since the communication is happening over WiFi, the maximum packet size is typically determined by the Maximum Transmission Unit (MTU) of the WiFi network. The MTU defines the maximum size of a packet that can be transmitted over the network without fragmentation. The MTU for SPI communication (GAP8 -> esp32) is 1022bytes.
 
 - **Explain your implementation of the communication protocol.**
 
