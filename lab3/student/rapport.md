@@ -24,17 +24,17 @@ The value of fc Frequency is 50MHz:
 
 ![](./picture/Screenshot_2024-04-30_17-55-03.png)
 
-Like we can see above we do not receive only our prints in the cfclient. We receive also other message from the esp32, the micro controller wifi. It is the Wi-Fi network interface between the PC and the drone, so we receive connection status log for example. 
+Like we can see above we do not receive only our prints in the cfclient. We receive also other message from the esp32, the micro controller wifi. It is the Wi-Fi network interface between the PC and the drone, so we receive connection status log for example. In the CFClient we recieve the message CPX-INT-ROUTER Message on function which is not handled (0x5) because we couldn't flash the stm32 with the main.c receive_app_msg succesfully. The makefile kept saying that the path we specified is a directory we tried to give the absolute and relative path but neither of them worked. Nevertheless we succesfully receive the frequency with the cpxPrintToConsole function.
 
 - **What part of the data flow is responsible for these ?**
 
-The part responsible for these messages is the esp32 that receives Wi-Fi messages from the PC and forwards them to the GAP8 through UART.
+The part responsible for these messages is the esp32 that receives Wi-Fi messages from the PC and forwards them to the GAP8 through UART. CPX has its own communication stack which allow to route packet on the different intermediate on the ai deck and drone itself (GAP8, esp32, stm32 and host wifi=>pc);
 
-The Gap8 uses a core like a microcontroller that gets the images from the camera and gives them to the esp32 module. Then the esp module sends the images to the connected PC. 
+Here we specify in the rx_wifi_task we wait on the CPX_F_WIFI_CTRL function to provides us the packet with wifi setup and signaling information. Knowing the only wifi interface on the drone is the esp32 I think the wifi control function is implemented on the esp. When the esp32 get a new wifi connection info it sends it to the GAP8 via SPI with the function CPX_F_WIFI_CTRL in the CPX header. Then we can retrieve connection status by casting data field into (WiFiCTRLPacket_t) and the status will be stored in the first byte.
 
 - **What happens when you connect 2 clients to the GAP8 ? Is it an expected behavior ?**
 
-If I connect another client to the drone nothing happens or is printed. This is the case because the variable set when the connection is made is already set so the program ignores the packet.
+If I connect another client to the drone nothing happens or is printed. But on the host side we are unable to connect more than one host to the drone. We need to disconnect one host in order to connect the other one. I can't realy explain why we can't connect connect multiple host at the same time. I searched in the ai deck documentation and in the NINA-W102 datasheet but I couldn't find any explanation. 
 
 ### 4. Image acquisition :
 
@@ -49,17 +49,17 @@ The camera_task function orchestrates the acquisition and transmission of images
 
 - **What is the max packet size ?**
 
-The maximum packet size is determined by the underlying communication protocol and the network infrastructure being used. In this case, since the communication is happening over WiFi, the maximum packet size is typically determined by the Maximum Transmission Unit (MTU) of the WiFi network. The MTU defines the maximum size of a packet that can be transmitted over the network without fragmentation.
+The maximum packet size is determined by the underlying communication protocol and the network infrastructure being used. In this case, since the communication is happening over WiFi, the maximum packet size is typically determined by the Maximum Transmission Unit (MTU) of the WiFi network. The MTU defines the maximum size of a packet that can be transmitted over the network without fragmentation. The MTU for SPI communication (GAP8 -> esp32) is 1022bytes.
 
 - **Explain your implementation of the communication protocol.**
 
 we  created a function that creates a header packet containing information about the image captured by the drone. This includes metadata such as width, height, depth, type, and size of the image.
 
-We use the ```sendBufferViaCPXBlocking``` function then to send the header to the route configured before with ```cpxInitRoute(CPX_T_GAP8, CPX_T_WIFI_HOST, CPX_F_APP, &txp.route)```. This function sends the packet over the WiFi connection to the designated host (in this case, a PC).
+We use the ```cpxSendPacketBlocking``` function then to send the header to the route configured before with ```cpxInitRoute(CPX_T_GAP8, CPX_T_WIFI_HOST, CPX_F_APP, &txp.route)```. This function sends the packet over the WiFi connection to the designated host (in this case, a PC).
 
-Following the transmission of header information, the actual image data is sent using the sendBufferViaCPXBlocking function. This function  sends the image data buffer over the same WiFi connection to the PC.
+Following the transmission of header information, the actual image data is sent using the sendBufferViaCPXBlocking function => because image size can exceed MTU we split the image data into multiple packet, the reciever is in charge to gather all the data afterward.
 
-The communication protocol seems to be based on the CPX (Cyclops-P7) protocol, which is a proprietary protocol for communication between the drone (or other devices) and a host system (in this case, a PC) over a WiFi connection.
+We reuse the python script opencv-viewer.py from the wifi-img-streamer project. To gather all the image data our python script fetch img size by unpacking header structure and then we append each batch of data to the imgStream data array until we've gather every data from every packet.
 
 ### 6. Image processing : 
 
