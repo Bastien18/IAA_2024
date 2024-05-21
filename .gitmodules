@@ -4,3 +4,6 @@
 [submodule "lab5/RLDronePilot"]
 	path = lab5/RLDronePilot
 	url = https://github.com/reds-heig/RLDronePilot.git
+[submodule "labo5/RLDronePilot"]
+	path = labo5/RLDronePilot
+	url = https://github.com/Bastien18/RLDronePilot.git
