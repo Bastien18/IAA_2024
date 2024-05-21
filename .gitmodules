@@ -1,0 +1,6 @@
+[submodule "lab05/lab05/RLDronePilot"]
+	path = lab05/lab05/RLDronePilot
+	url = https://github.com/reds-heig/RLDronePilot.git
+[submodule "lab5/RLDronePilot"]
+	path = lab5/RLDronePilot
+	url = https://github.com/reds-heig/RLDronePilot.git
