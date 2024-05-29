@@ -15,7 +15,7 @@ model.load(model_path)
 dummy_input = torch.randn(1, 1, model.cropped_img_height, model.img_width)
 
 # Chemin du onnx file de notre modèle
-onnx_path = 'patfinder3.onnx'
+onnx_path = 'pathfinder3.onnx'
 
 # Export du modèle en onnx
 torch.onnx.export(model, dummy_input, onnx_path, export_params=True, opset_version=10,
