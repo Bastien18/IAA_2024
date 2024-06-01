@@ -80,10 +80,10 @@ class PathFinder(nn.Module):
         """Preprocess the given image
         
         Parameters
-        ----------
+        ----------        highlight_vert_lines : bool
+
         image : np.array
             Numpy array of float
-        highlight_vert_lines : bool
             True if vertical lines should be highlighted, False otherwise
         remove_hori_lines : bool
             True if horizontal lines should be removed, False otherwise

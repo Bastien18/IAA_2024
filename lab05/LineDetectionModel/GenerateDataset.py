@@ -48,7 +48,7 @@ def generate_drone_image_pov(width, height):
 
 # Generate multiple images with the new perspective
 num_images = 100
-width, height = 200, 200
+width, height = 324, 244
 new_images = [generate_drone_image_pov(width, height) for _ in range(num_images)]
 
 # Save images to disk and collect filenames
